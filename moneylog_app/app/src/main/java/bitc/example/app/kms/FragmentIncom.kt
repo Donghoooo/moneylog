@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import bitc.example.app.AppServerClass
 import bitc.example.app.databinding.FragmentIncomBinding
 import bitc.example.app.dto.IncomeLogDTO
+import bitc.example.app.dto.TodoListDTO
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -31,10 +32,6 @@ class FragmentIncom : Fragment() {
     // TODO: Rename and change types of parameters
     private var param1: String? = null
     private var param2: String? = null
-
-    // 로그인 되어있는 memberId 값을 담을 변수 memberId
-    private lateinit var memberId1: SharedPreferences
-    private lateinit var memberId: String
 
     private lateinit var binding: FragmentIncomBinding
 
@@ -58,19 +55,12 @@ class FragmentIncom : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        //  변수 memberId에 로그인 되어있는 값(test1)을 String타입으로 할당해줌
-        memberId1 = requireContext().getSharedPreferences("memberInfo", MODE_PRIVATE)
-        memberId = memberId1.getString("memberId", "아이디").toString()
-
-        Log.d("fullstack503", "memberId: $memberId")
-
-
-        //  레트로 핏 API로 데이터를 받아오고 로그인 아이디를 담은 memberId를 매개변수로 서버로 전송
+        //  레트로 핏 API로 데이터를 받아옴
         val api = AppServerClass.instance
-        val call = api.getIncomeList("test1")
+        val call = api.getTodoList()
 
-        call.enqueue(object : Callback<List<IncomeLogDTO>>{
-            override fun onResponse(p0: Call<List<IncomeLogDTO>>, res: Response<List<IncomeLogDTO>>) {
+        call.enqueue(object : Callback<List<TodoListDTO>>{
+            override fun onResponse(p0: Call<List<TodoListDTO>>, res: Response<List<TodoListDTO>>) {
                 if (res.isSuccessful) {
                     val result = res.body()?.toMutableList()
                     Log.d("csy", "result : $result")
@@ -86,10 +76,36 @@ class FragmentIncom : Fragment() {
                 }
             }
 
-            override fun onFailure(p0: Call<List<IncomeLogDTO>>, t: Throwable) {
+            override fun onFailure(p0: Call<List<TodoListDTO>>, t: Throwable) {
                 Log.d("csy", "message : ${t.message}")
             }
         })
+
+//        //  레트로 핏 API로 데이터를 받아옴
+//        val api = AppServerClass.instance
+//        val call = api.getTodoList("test1")
+//
+//        call.enqueue(object : Callback<List<IncomeLogDTO>>{
+//            override fun onResponse(p0: Call<List<IncomeLogDTO>>, res: Response<List<IncomeLogDTO>>) {
+//                if (res.isSuccessful) {
+//                    val result = res.body()?.toMutableList()
+//                    Log.d("csy", "result : $result")
+//
+//                    val adapter = result?.let { IncomAdapter(it) }
+//
+//                    binding.incomRecyclerView.layoutManager = LinearLayoutManager(context)
+//                    binding.incomRecyclerView.adapter = adapter
+//                    binding.incomRecyclerView.addItemDecoration(DividerItemDecoration(context, LinearLayoutManager.VERTICAL))
+//                }
+//                else {
+//                    Log.d("csy", "송신실패")
+//                }
+//            }
+//
+//            override fun onFailure(p0: Call<List<IncomeLogDTO>>, t: Throwable) {
+//                Log.d("csy", "message : ${t.message}")
+//            }
+//        })
 
 //        val items = mutableListOf<String>()
 //        for (i in 1..12) {

@@ -2,6 +2,7 @@ package bitc.fullstack503.moneylog_spring.service.kms;
 
 import bitc.fullstack503.moneylog_spring.dto.ExpenseLogDTO;
 import bitc.fullstack503.moneylog_spring.dto.IncomeLogDTO;
+import bitc.fullstack503.moneylog_spring.dto.TodoListDTO;
 import bitc.fullstack503.moneylog_spring.mapper.kms.ListMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -15,8 +16,8 @@ public class ListServiceImpl implements ListService {
     private ListMapper listMapper;
 
     @Override
-    public List<IncomeLogDTO> selectincomeList(String memberId) throws Exception {
-        return listMapper.selectincomeList(memberId);
+    public List<TodoListDTO> selectincomeList() throws Exception {
+        return listMapper.selectincomeList();
     }
 
     @Override

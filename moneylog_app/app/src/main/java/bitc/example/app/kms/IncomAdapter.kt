@@ -7,9 +7,10 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import bitc.example.app.databinding.IncomItemRecyclerViewBinding
 import bitc.example.app.dto.IncomeLogDTO
+import bitc.example.app.dto.TodoListDTO
 import bitc.example.app.sagmin.DetailIncomeActivity
 
-class IncomAdapter(val datas: MutableList<IncomeLogDTO>): RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+class IncomAdapter(val datas: MutableList<TodoListDTO>): RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     //class IncomAdapter(val datas: MutableList<String>): RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         return IncomViewHolder(IncomItemRecyclerViewBinding.inflate(LayoutInflater.from(parent.context), parent, false))
@@ -21,41 +22,49 @@ class IncomAdapter(val datas: MutableList<IncomeLogDTO>): RecyclerView.Adapter<R
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, index: Int) {
 
-
-
-
-
-
-//        Log.d("fullstack503", "onBindViewHolder : $position")
-//        Log.d("csy", "datas : $datas")
-
-//        val incomeDateList = datas.map { it.incomeDate }
-//        val incomeCateList = datas.map { it.incomeCate }
-//        val incomeMoneyList = datas.map { it.incomeMoney }
-
-
         val binding = (holder as IncomViewHolder).binding
 
-        binding.incomItemDateData.text = datas[index].incomeDate
-        binding.incomItemCateData.text = datas[index].incomeCate
-        binding.incomItemMoneyData.text = datas[index].incomeMoney
-        binding.incomItemMemoData.text = datas[index].incomeMemo
-        binding.incomItemSourceData.text = datas[index].incomeSource
-        binding.incomItemUseData.text = datas[index].incomeUse
-        binding.incomItemSeqData.text = datas[index].incomeLogSeq.toString()
+//        binding.incomItemDateData.text = datas[index].incomeLogSeq
+        binding.incomItemCateData.text = datas[index].todoTitle
+//        binding.incomItemMoneyData.text = datas[index].incomeMoney
+        binding.incomItemMemoData.text = datas[index].todoMemo
+        binding.incomItemSourceData.text = datas[index].todoStatus
+//        binding.incomItemUseData.text = datas[index].todoMemo
+        binding.incomItemSeqData.text = datas[index].todoSeq.toString()
 
         binding.linearIncome.setOnClickListener {
             val context = holder.itemView.context
             val intent = Intent(context, DetailIncomeActivity::class.java).apply {
-                putExtra("incomeLogSeq", datas[index].incomeLogSeq)
-                putExtra("incomeDate", datas[index].incomeDate)
-                putExtra("incomeCate", datas[index].incomeCate)
-                putExtra("incomeMoney", datas[index].incomeMoney)
-                putExtra("incomeSource", datas[index].incomeSource)
-                putExtra("incomeMemo", datas[index].incomeMemo)
+                putExtra("incomeLogSeq", datas[index].todoSeq)
+//                putExtra("incomeDate", datas[index].incomeDate)
+                putExtra("incomeCate", datas[index].todoTitle)
+//                putExtra("incomeMoney", datas[index].incomeMoney)
+                putExtra("incomeSource", datas[index].todoStatus)
+                putExtra("incomeMemo", datas[index].todoMemo)
             }
             context.startActivity(intent)
         }
+
+//        binding.incomItemDateData.text = datas[index].incomeLogSeq
+//        binding.incomItemCateData.text = datas[index].incomeCate
+//        binding.incomItemMoneyData.text = datas[index].incomeMoney
+//        binding.incomItemMemoData.text = datas[index].incomeMemo
+//        binding.incomItemSourceData.text = datas[index].incomeSource
+//        binding.incomItemUseData.text = datas[index].incomeUse
+//        binding.incomItemSeqData.text = datas[index].incomeLogSeq.toString()
+//
+//        binding.linearIncome.setOnClickListener {
+//            val context = holder.itemView.context
+//            val intent = Intent(context, DetailIncomeActivity::class.java).apply {
+//                putExtra("incomeLogSeq", datas[index].incomeLogSeq)
+//                putExtra("incomeDate", datas[index].incomeDate)
+//                putExtra("incomeCate", datas[index].incomeCate)
+//                putExtra("incomeMoney", datas[index].incomeMoney)
+//                putExtra("incomeSource", datas[index].incomeSource)
+//                putExtra("incomeMemo", datas[index].incomeMemo)
+//            }
+//            context.startActivity(intent)
+//        }
 
     }
 

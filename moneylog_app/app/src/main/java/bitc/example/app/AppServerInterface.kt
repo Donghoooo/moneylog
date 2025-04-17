@@ -4,6 +4,7 @@ import bitc.example.app.dto.IncomeLogDTO
 import bitc.example.app.dto.MemberDTO
 import bitc.example.app.dto.SearchDTO
 import bitc.example.app.dto.ExpenseLogDTO
+import bitc.example.app.dto.TodoListDTO
 import retrofit2.Call
 import retrofit2.http.Body
 import retrofit2.http.DELETE
@@ -67,6 +68,10 @@ interface AppServerInterface {
     @Query("keyword") keyword: String?,  // 키워드
     @Query("sortBy") sortBy: String // 정렬 기준
   ): Call<List<SearchDTO>>
+
+//  todoList
+  @GET("/list/income")
+  fun getTodoList(): Call<List<TodoListDTO>>
 
   //  수입/지출 리스트
   @GET("/list/income")
