@@ -67,7 +67,7 @@ class FragmentIncom : Fragment() {
 
         //  레트로 핏 API로 데이터를 받아오고 로그인 아이디를 담은 memberId를 매개변수로 서버로 전송
         val api = AppServerClass.instance
-        val call = api.getIncomeList(memberId)
+        val call = api.getIncomeList("test1")
 
         call.enqueue(object : Callback<List<IncomeLogDTO>>{
             override fun onResponse(p0: Call<List<IncomeLogDTO>>, res: Response<List<IncomeLogDTO>>) {
