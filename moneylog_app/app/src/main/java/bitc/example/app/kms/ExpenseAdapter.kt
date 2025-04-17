@@ -9,9 +9,10 @@ import bitc.example.app.databinding.ExpenseItemRecyclerViewBinding
 import bitc.example.app.databinding.IncomItemRecyclerViewBinding
 import bitc.example.app.dto.ExpenseLogDTO
 import bitc.example.app.dto.IncomeLogDTO
+import bitc.example.app.dto.TodoListDTO
 import bitc.example.app.sagmin.DetailOutcomeActivity
 
-class ExpenseAdapter(val datas: MutableList<ExpenseLogDTO>): RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+class ExpenseAdapter(val datas: MutableList<TodoListDTO>): RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         return ExpenseViewHolder(ExpenseItemRecyclerViewBinding.inflate(LayoutInflater.from(parent.context), parent, false))
     }
@@ -21,34 +22,27 @@ class ExpenseAdapter(val datas: MutableList<ExpenseLogDTO>): RecyclerView.Adapte
     }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, index: Int) {
-//        Log.d("fullstack503", "onBindViewHolder : $position")
-//        Log.d("csy", "datas : $datas")
-
-//        val incomeDateList = datas.map { it.incomeDate }
-//        val incomeCateList = datas.map { it.incomeCate }
-//        val incomeMoneyList = datas.map { it.incomeMoney }
-
 
         val binding = (holder as ExpenseViewHolder).binding
 
-        binding.expenseItemDateData.text = datas[index].expenseDate
-        binding.expenseItemCateData.text = datas[index].expenseCate
-        binding.expenseItemMoneyData.text = datas[index].expenseMoney
-        binding.expenseItemMemoData.text = datas[index].expenseMemo
-        binding.expenseItemOptionData.text = datas[index].paymentOption
-        binding.expenseItemUseData.text = datas[index].expenseUse
-        binding.expenseItemSeqData.text = datas[index].expenseLogSeq.toString()
+//        binding.expenseItemDateData.text = datas[index].expenseDate
+        binding.expenseItemCateData.text = datas[index].todoTitle
+//        binding.expenseItemMoneyData.text = datas[index].expenseMoney
+        binding.expenseItemMemoData.text = datas[index].todoMemo
+        binding.expenseItemOptionData.text = datas[index].todoStatus
+//        binding.expenseItemUseData.text = datas[index].expenseUse
+        binding.expenseItemSeqData.text = datas[index].todoSeq.toString()
 
         binding.linearOutcome.setOnClickListener {
             val context = holder.itemView.context
             val intent = Intent(context, DetailOutcomeActivity::class.java).apply{
-                putExtra("expenseLogSeq",datas[index].expenseLogSeq)
-                putExtra("expenseCate",datas[index].expenseCate)
-                putExtra("expenseMoney",datas[index].expenseMoney)
-                putExtra("expenseMemo",datas[index].expenseMemo)
-                putExtra("paymentOption",datas[index].paymentOption)
-                putExtra("expenseUse",datas[index].expenseUse)
-                putExtra("expenseDate",datas[index].expenseDate)
+                putExtra("expenseLogSeq",datas[index].todoSeq)
+                putExtra("expenseCate",datas[index].todoTitle)
+//                putExtra("expenseMoney",datas[index].expenseMoney)
+                putExtra("expenseMemo",datas[index].todoMemo)
+                putExtra("paymentOption",datas[index].todoStatus)
+//                putExtra("expenseUse",datas[index].expenseUse)
+//                putExtra("expenseDate",datas[index].expenseDate)
             }
             context.startActivity(intent)
         }

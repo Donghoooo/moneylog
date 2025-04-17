@@ -2,10 +2,19 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="bitc.fullstack503.moneylog_spring.mapper.kms.ListMapper">
 
-    <select id="selectincomeList" resultType="bitc.fullstack503.moneylog_spring.dto.TodoListDTO">
+    <select id="selectTodoList" resultType="bitc.fullstack503.moneylog_spring.dto.TodoListDTO">
         SELECT
             *
         FROM todo_list
+    </select>
+
+    <select id="selectDoneList" resultType="bitc.fullstack503.moneylog_spring.dto.TodoListDTO">
+        SELECT
+            *
+        FROM
+            todo_list
+        WHERE
+            todo_status = 'done'
     </select>
 
 <!--    <select id="selectincomeList" resultType="bitc.fullstack503.moneylog_spring.dto.IncomeLogDTO" parameterType="String">-->
@@ -16,11 +25,11 @@
 <!--        WHERE member_id = #{memberId}-->
 <!--    </select>-->
 
-    <select id="selectExpenseList" resultType="bitc.fullstack503.moneylog_spring.dto.ExpenseLogDTO" parameterType="String">
-        SELECT
-            DATE_FORMAT(expense_date, '%Y-%m-%d') AS expense_date,
-            expense_log_seq, member_id, expense_money, expense_cate, expense_memo, payment_option, expense_use
-        FROM expense_log
-        WHERE member_id = #{memberId}
-    </select>
+<!--    <select id="selectExpenseList" resultType="bitc.fullstack503.moneylog_spring.dto.ExpenseLogDTO" parameterType="String">-->
+<!--        SELECT-->
+<!--            DATE_FORMAT(expense_date, '%Y-%m-%d') AS expense_date,-->
+<!--            expense_log_seq, member_id, expense_money, expense_cate, expense_memo, payment_option, expense_use-->
+<!--        FROM expense_log-->
+<!--        WHERE member_id = #{memberId}-->
+<!--    </select>-->
 </mapper>

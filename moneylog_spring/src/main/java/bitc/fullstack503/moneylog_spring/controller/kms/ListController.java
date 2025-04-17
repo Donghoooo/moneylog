@@ -16,15 +16,22 @@ public class ListController {
     @Autowired
     private ListService listService;
 
-    @GetMapping({"/list/income"})
-    public List<TodoListDTO> incomelist() throws Exception{
-//        ModelAndView mav = new ModelAndView("main/kms/list");
+    @GetMapping({"/todoList/todo"})
+    public List<TodoListDTO> selectTodolist() throws Exception{
 
-        List<TodoListDTO> incomeList = listService.selectincomeList();
-//        mav.addObject("incomeList", incomeList);
+        List<TodoListDTO> selectTodolist = listService.selectTodoList();
 
-        return incomeList;
+        return selectTodolist;
     }
+
+    @GetMapping({"/todoList/done"})
+    public List<TodoListDTO> selectDonelist() throws Exception{
+
+        List<TodoListDTO> selectDonelist = listService.selectDoneList();
+
+        return selectDonelist;
+    }
+
 
 //    @GetMapping({"/list/income"})
 //    public List<IncomeLogDTO> incomelist(String memberId) throws Exception{
@@ -38,14 +45,14 @@ public class ListController {
 //        return incomeList;
 //    }
 
-    @GetMapping({"/list/expense"})
-    public List<ExpenseLogDTO> expenselist(String memberId) throws Exception{
-//        ModelAndView mav = new ModelAndView("main/kms/list");
-
-        List<ExpenseLogDTO> expenseList = listService.selectExpenseList(memberId);
-//        mav.addObject("incomeList", incomeList);
-
-        return expenseList;
-    }
+//    @GetMapping({"/list/expense"})
+//    public List<ExpenseLogDTO> expenselist(String memberId) throws Exception{
+////        ModelAndView mav = new ModelAndView("main/kms/list");
+//
+//        List<ExpenseLogDTO> expenseList = listService.selectExpenseList(memberId);
+////        mav.addObject("incomeList", incomeList);
+//
+//        return expenseList;
+//    }
 
 }

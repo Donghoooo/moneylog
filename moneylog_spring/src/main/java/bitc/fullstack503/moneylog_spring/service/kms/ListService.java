@@ -7,7 +7,9 @@ import bitc.fullstack503.moneylog_spring.dto.TodoListDTO;
 import java.util.List;
 
 public interface ListService {
-    List<TodoListDTO> selectincomeList() throws Exception;
+    List<TodoListDTO> selectTodoList() throws Exception;
 
-    List<ExpenseLogDTO> selectExpenseList(String memberId) throws Exception;
+    List<TodoListDTO> selectDoneList() throws Exception;
+
+//    List<ExpenseLogDTO> selectExpenseList(String memberId) throws Exception;
 }

@@ -16,12 +16,17 @@ public class ListServiceImpl implements ListService {
     private ListMapper listMapper;
 
     @Override
-    public List<TodoListDTO> selectincomeList() throws Exception {
-        return listMapper.selectincomeList();
+    public List<TodoListDTO> selectTodoList() throws Exception {
+        return listMapper.selectTodoList();
     }
 
     @Override
-    public List<ExpenseLogDTO> selectExpenseList(String memberId) throws Exception {
-        return listMapper.selectExpenseList(memberId);
+    public List<TodoListDTO> selectDoneList() throws Exception {
+        return listMapper.selectDoneList();
     }
+
+//    @Override
+//    public List<ExpenseLogDTO> selectExpenseList(String memberId) throws Exception {
+//        return listMapper.selectExpenseList(memberId);
+//    }
 }

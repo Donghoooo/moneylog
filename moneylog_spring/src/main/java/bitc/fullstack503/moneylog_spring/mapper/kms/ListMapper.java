@@ -9,7 +9,10 @@ import java.util.List;
 
 @Mapper
 public interface ListMapper {
-    List<TodoListDTO> selectincomeList() throws Exception;
+    List<TodoListDTO> selectTodoList() throws Exception;
 
-    List<ExpenseLogDTO> selectExpenseList(String memberId) throws Exception;
+    List<TodoListDTO> selectDoneList() throws Exception;
+
+
+//    List<ExpenseLogDTO> selectExpenseList(String memberId) throws Exception;
 }

@@ -70,8 +70,12 @@ interface AppServerInterface {
   ): Call<List<SearchDTO>>
 
 //  todoList
-  @GET("/list/income")
+  @GET("/todoList/todo")
   fun getTodoList(): Call<List<TodoListDTO>>
+
+  //  doneList
+  @GET("/todoList/done")
+  fun getDoneList(): Call<List<TodoListDTO>>
 
   //  수입/지출 리스트
   @GET("/list/income")
