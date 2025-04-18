@@ -14,6 +14,7 @@ import bitc.example.app.AppServerClass
 import bitc.example.app.R
 import bitc.example.app.databinding.ActivityDetailIncomeBinding
 import bitc.example.app.dto.IncomeLogDTO
+import bitc.example.app.dto.TodoListDTO
 import bitc.example.app.kms.MonthlyListActivity
 import bitc.example.app.sdh.MyPageCheckActivity
 import bitc.example.app.ui.CateSearchActivity
@@ -55,72 +56,46 @@ class DetailIncomeActivity : AppCompatActivity() {
 
 
 
+//        어댑터에서 가져온 데이터를 변수를 선언해서 담아줌
+        val todoSeq = intent.getIntExtra("todoSeq", -1)
+        val todoTitle = intent.getStringExtra("todoTitle")
+        val todoMemo = intent.getStringExtra("todoMemo")
+        val todoStatus = intent.getStringExtra("todoStatus")
 
-        binding.incomeDialogReceipt.setOnClickListener{
-            val bankDialog = IncomeBankChangeActivity(this, selectedBanks ?: "") { selected ->
-                selectedBanks = selected.toString()
-                updateBankText()
-            }
-            bankDialog.show()
-
-
-        }
-
-
-
-        binding.btnPassIncome.setOnClickListener {
-            val categoryDialog = IncomeCategoryChangeActivity(this, selectedCategories ?:""){ selected ->
-                selectedCategories = selected.toString()
-                updateCategoryText()
-            }
-            categoryDialog.show()
-        }
-
-        val incomeLogSeq = intent.getIntExtra("incomeLogSeq", -1)
-        val incomeDate = intent.getStringExtra("incomeDate")
-        val incomeCate = intent.getStringExtra("incomeCate")
-        val incomeMoney = intent.getStringExtra("incomeMoney")
-        val incomeSource = intent.getStringExtra("incomeSource")
-        val incomeMemo = intent.getStringExtra("incomeMemo")
-        val incomeUse = intent.getStringExtra("incomeUse")
+//        incomAdapter에서 값을 받아와서 상세페이지에 바인딩
+        binding.todoSeq.text = todoSeq.toString()
+        binding.todoTitle.setText(todoTitle)
+        binding.todoMemo.setText(todoMemo)
+        binding.todoStatus.setText(todoStatus)
 
 
-
-        binding.incomeLogSeq.text = incomeLogSeq.toString()
-        binding.detailIncomeDate.text = incomeDate
-        binding.btnPassIncome.text = incomeCate
-        binding.incomeMoneyReceipt.setText(incomeMoney)
-        binding.incomeInfoReceipt.setText(incomeUse)
-        binding.incomeMemoReceipt.setText(incomeMemo)
-        binding.incomeDialogReceipt.text = incomeSource
-
-
-
-
-
+//      수정 버튼 클릭시 발생할 이벤트
         binding.btnUpdate.setOnClickListener {
-            val cate = binding.btnPassIncome.text.toString()
-            val money = binding.incomeMoneyReceipt.text.toString()
-            val source = binding.incomeDialogReceipt.text.toString()
-            val incomeMemo = binding.incomeMemoReceipt.text.toString()
-            val incomeUse = binding.incomeInfoReceipt.text.toString()
-            val seq = binding.incomeLogSeq.text.toString().toInt()
+//            바인딩에 저장된 값을 변수에 담아서
+            val seq = binding.todoSeq.text.toString().toInt()
+            val todoTitle = binding.todoTitle.text.toString()
+            val todoMemo = binding.todoMemo.text.toString()
+            val todoStatus = binding.todoStatus.text.toString()
 
-            var income = IncomeLogDTO()
-            income.incomeLogSeq = seq
-            income.incomeCate = cate
-            income.incomeMoney = money
-            income.incomeSource = source
-            income.incomeMemo = incomeMemo
-            income.incomeUse = incomeUse
+//            매개변수로 보낼 DTO타입의 변수를 선언하고 클릭된 요소의 내용들을 그 안에 담아서 서버에 보냄
+            var todo = TodoListDTO()
+            todo.todoSeq = seq
+            todo.todoMemo = todoMemo
+            todo.todoTitle = todoTitle
+            todo.todoStatus = todoStatus
+
             val api = AppServerClass.instance
-            val call = api.updateIncome(income)
+            val call = api.updateTodo(todo)
             retrofitResponse(call)
         }
 
 
+//      삭제 버튼 클릭시 발생할 이벤트
         binding.btnDrop.setOnClickListener {
-            val seq = binding.incomeLogSeq.text?.toString()?.toIntOrNull() ?: -1
+//            val seq = binding.todoSeq.text?.toString()?.toIntOrNull() ?: -1
+
+            val seq = binding.todoSeq.text.toString().toInt()
+
 
             if (seq == -1) {
                 Log.e("DetailIncomeActivity", "삭제할 수 없는 데이터입니다.")
@@ -133,12 +108,11 @@ class DetailIncomeActivity : AppCompatActivity() {
                 .setMessage("정말로 삭제하시겠습니까?")
                 .setPositiveButton("삭제") { _, _ ->
                     val api = AppServerClass.instance
-                    val call = api.deleteIncome(seq)
+                    val call = api.deleteTodo(seq)
                     retrofitResponse(call) // 재사용 함수 호출
                 }
                 .setNegativeButton("취소", null)
                 .show()
-
         }
 
 
@@ -160,17 +134,10 @@ class DetailIncomeActivity : AppCompatActivity() {
             startActivity(intent)
         }
     }
-    //  카테고리 선택 부분 클릭 시 다이얼로그 표시
-    private fun updateCategoryText() {
-        binding.btnPassIncome.text = selectedCategories ?: "선택해주세요"
-
-    }
 
 
-    //  자산 방식 클릭 시 다이얼로그 표시
-    private fun updateBankText(){
-        binding.incomeDialogReceipt.text = selectedBanks ?: "선택해주세요"
-    }
+
+
 
     override fun onSupportNavigateUp(): Boolean {
         super.onSupportNavigateUp()

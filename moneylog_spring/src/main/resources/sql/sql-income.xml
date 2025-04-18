@@ -8,19 +8,18 @@
         values (#{memberId},#{incomeDate},#{incomeMoney},#{incomeCate},#{incomeMemo},#{incomeSource},#{incomeUse})
     </insert>
 
-<!--    수입 내용 수정하기 -->
-    <update id="incomeUpdate" parameterType="bitc.fullstack503.moneylog_spring.dto.IncomeLogDTO">
-update income_log
-set income_money =#{incomeMoney}, income_cate = #{incomeCate}, income_memo = #{incomeMemo}, income_source = #{incomeSource},
-    income_use = #{incomeUse}
-where income_log_seq = #{incomeLogSeq}
+<!--    todo 내용 수정하기 -->
+    <update id="todoUpdate" parameterType="bitc.fullstack503.moneylog_spring.dto.TodoListDTO">
+        update todo_list
+        set todo_title =#{todoTitle}, todo_status =#{todoStatus}, todo_memo = #{todoMemo}, todo_Status = #{todoStatus}
+        where todo_seq = #{todoSeq};
     </update>
 
-<!--    수입 내용 삭제하기 -->
-<delete id="incomeDelete" parameterType="int">
-    DELETE FROM income_log
-    where income_log_seq = #{incomeLogSeq}
-</delete>
+<!--    todo 내용 삭제하기 -->
+    <delete id="todoDelete" parameterType="int">
+        DELETE FROM todo_list
+        where todo_seq = #{todoSeq}
+    </delete>
 
 
 </mapper>

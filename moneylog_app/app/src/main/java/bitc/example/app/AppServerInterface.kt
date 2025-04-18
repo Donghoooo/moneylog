@@ -38,13 +38,21 @@ interface AppServerInterface {
   @POST("income/process")
   fun postIncome(@Body income: IncomeLogDTO): Call<String>
 
+
+
+
   //  수입 수정
-  @POST("income/update")
-  fun updateIncome(@Body incomeLog: IncomeLogDTO): Call<Int>
+  @POST("todoList/update")
+  fun updateTodo(@Body todo: TodoListDTO): Call<Int>
 
   // 수입 삭제
-  @DELETE("income/delete")
-  fun deleteIncome(@Query("incomeLogSeq") incomeLogSeq: Int): Call<Int>
+  @DELETE("todoList/delete")
+  fun deleteTodo(@Query("todoSeq") todoSeq: Int): Call<Int>
+
+
+
+
+
 
   // 지출 저장
   @POST("/outcome/process")

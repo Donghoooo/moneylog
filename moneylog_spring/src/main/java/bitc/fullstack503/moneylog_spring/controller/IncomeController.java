@@ -1,6 +1,7 @@
 package bitc.fullstack503.moneylog_spring.controller;
 
 import bitc.fullstack503.moneylog_spring.dto.IncomeLogDTO;
+import bitc.fullstack503.moneylog_spring.dto.TodoListDTO;
 import bitc.fullstack503.moneylog_spring.service.IncomeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -19,15 +20,27 @@ public class IncomeController {
         incomeService.income (income);
     }
 
-//    수입 내용 수정하기
-@PostMapping("income/update")
-public int incomeUpdate(@RequestBody IncomeLogDTO incomeLog) throws Exception {
-    return incomeService.incomeUpdate(incomeLog);
-}
-
-//    수입 내용 삭제하기
-    @DeleteMapping("income/delete")
-    public int incomeDelete(@RequestParam("incomeLogSeq") int incomeLogSeq) throws Exception{
-        return incomeService.incomeDelete(incomeLogSeq);
+    //    수입 내용 수정하기
+    @PostMapping("todoList/update")
+    public int todoUpdate(@RequestBody TodoListDTO todo) throws Exception {
+        return incomeService.todoUpdate(todo);
     }
+
+    //    수입 내용 삭제하기
+    @DeleteMapping("todoList/delete")
+    public int todoDelete(@RequestParam("todoSeq") int todoSeq) throws Exception{
+        return incomeService.todoDelete(todoSeq);
+    }
+
+////    수입 내용 수정하기
+//    @PostMapping("income/update")
+//    public int incomeUpdate(@RequestBody IncomeLogDTO incomeLog) throws Exception {
+//    return incomeService.incomeUpdate(incomeLog);
+//}
+//
+////    수입 내용 삭제하기
+//    @DeleteMapping("income/delete")
+//    public int incomeDelete(@RequestParam("incomeLogSeq") int incomeLogSeq) throws Exception{
+//        return incomeService.incomeDelete(incomeLogSeq);
+//    }
 }
