@@ -57,6 +57,10 @@ class FragmentIncom : Fragment() {
 
 
 //        //  레트로 핏 API로 데이터를 받아옴
+        refreshTodoList()
+    }
+
+    fun refreshTodoList() {
         val api = AppServerClass.instance
         val call = api.getTodoList()
 
@@ -64,35 +68,26 @@ class FragmentIncom : Fragment() {
             override fun onResponse(p0: Call<List<TodoListDTO>>, res: Response<List<TodoListDTO>>) {
                 if (res.isSuccessful) {
                     val result = res.body()?.toMutableList()
-                    Log.d("csy", "result : $result")
+                    Log.d("csy", "result refreshed : $result")
 
                     val adapter = result?.let { IncomAdapter(it) }
 
                     binding.incomRecyclerView.layoutManager = LinearLayoutManager(context)
                     binding.incomRecyclerView.adapter = adapter
-                    binding.incomRecyclerView.addItemDecoration(DividerItemDecoration(context, LinearLayoutManager.VERTICAL))
-                }
-                else {
-                    Log.d("csy", "송신실패")
+                    binding.incomRecyclerView.addItemDecoration(
+                        DividerItemDecoration(context, LinearLayoutManager.VERTICAL)
+                    )
+                } else {
+                    Log.d("csy", "refresh 실패")
                 }
             }
 
             override fun onFailure(p0: Call<List<TodoListDTO>>, t: Throwable) {
-                Log.d("csy", "message : ${t.message}")
+                Log.d("csy", "refresh 에러: ${t.message}")
             }
         })
-
-//        val items = mutableListOf<String>()
-//        for (i in 1..12) {
-//            items.add("$i")
-//        }
-
-//        val adapter = IncomAdapter(items)
-//
-//        binding.incomRecyclerView.layoutManager = LinearLayoutManager(context)
-//        binding.incomRecyclerView.adapter = adapter
-//        binding.incomRecyclerView.addItemDecoration(DividerItemDecoration(context, LinearLayoutManager.VERTICAL))
     }
+
 
 
     companion object {

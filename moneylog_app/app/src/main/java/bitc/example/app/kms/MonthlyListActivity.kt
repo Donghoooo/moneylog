@@ -115,6 +115,8 @@ class MonthlyListActivity : AppCompatActivity() {
             override fun onResponse(p0: Call<Int>, res: Response<Int>) {
                 if (res.isSuccessful) {
                     Log.d("fullstack503", "result : ${res.body()}")
+                    // 👉 투두 추가 성공 시 리스트 새로고침
+                    fragmentIncom.refreshTodoList()
                 } else {
                     Log.d("fullstack503", "송신 실패")
                 }
@@ -125,5 +127,6 @@ class MonthlyListActivity : AppCompatActivity() {
             }
         })
     }
+
 
 }
