@@ -6,6 +6,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.view.WindowInsetsAnimation
+import androidx.appcompat.app.AlertDialog
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -17,7 +18,10 @@ import bitc.example.app.sagmin.DetailIncomeActivity
 import okhttp3.Response
 import retrofit2.Callback
 
-class IncomAdapter(val datas: MutableList<TodoListDTO>): RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+class IncomAdapter(
+    val datas: MutableList<TodoListDTO>,
+    private val onStatusChanged: () -> Unit // ✅ 콜백 추가
+) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         return IncomViewHolder(IncomItemRecyclerViewBinding.inflate(LayoutInflater.from(parent.context), parent, false))
     }
@@ -41,31 +45,43 @@ class IncomAdapter(val datas: MutableList<TodoListDTO>): RecyclerView.Adapter<Re
 
         // 체크박스 클릭 리스너
         binding.todoCheckBox.setOnCheckedChangeListener { _, isChecked ->
-            val todoSeq = item.todoSeq
+            if (isChecked) {
+                val todoSeq = item.todoSeq
 
-            var todo = TodoListDTO()
-            todo.todoSeq = todoSeq
-            todo.todoStatus = done
+                val todo = TodoListDTO().apply {
+                    this.todoSeq = todoSeq
+                    this.todoStatus = done
+                }
 
-            val api = AppServerClass.instance
-            val call = api.updateStatus(todo)
+                val api = AppServerClass.instance
+                val call = api.updateStatus(todo)
 
-            call.enqueue(object : Callback<Int> {
-                override fun onResponse(p0: retrofit2.Call<Int>, res: retrofit2.Response<Int>) {
-                    if (res.isSuccessful) {
-                        val result = res.body()
-                        Log.d("csy", "result refreshed : $result")
+                call.enqueue(object : Callback<Int> {
+                    override fun onResponse(p0: retrofit2.Call<Int>, res: retrofit2.Response<Int>) {
+                        if (res.isSuccessful) {
+                            val result = res.body()
+                            Log.d("csy", "status 변경 성공: $result")
 
-                    } else {
-                        Log.d("csy", "refresh 실패")
+                            // ✅ 리스트에서 항목 제거
+                            datas.removeAt(index)
+                            notifyItemRemoved(index)
+                            notifyItemRangeChanged(index, datas.size)
+
+                            // ✅ 콜백으로 프래그먼트에게 알림
+                            onStatusChanged()
+                        } else {
+                            Log.d("csy", "상태 변경 실패")
+                        }
                     }
-                }
 
-                override fun onFailure(p0: retrofit2.Call<Int>, t: Throwable) {
-                    Log.d("csy", "refresh 에러: ${t.message}")
-                }
-            })
+                    override fun onFailure(p0: retrofit2.Call<Int>, t: Throwable) {
+                        Log.d("csy", "서버 에러: ${t.message}")
+                    }
+                })
+            }
         }
+
+
 
 //        상세페이지 액티브로 데이터 보내기
         binding.linearIncome.setOnClickListener {

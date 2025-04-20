@@ -70,7 +70,9 @@ class FragmentIncom : Fragment() {
                     val result = res.body()?.toMutableList()
                     Log.d("csy", "result refreshed : $result")
 
-                    val adapter = result?.let { IncomAdapter(it) }
+//                    todo 체크 시 바로 refresh 되면서 변경내용 반영
+                    val adapter = result?.let { IncomAdapter(it) { refreshTodoList() } }
+
 
                     binding.incomRecyclerView.layoutManager = LinearLayoutManager(context)
                     binding.incomRecyclerView.adapter = adapter
