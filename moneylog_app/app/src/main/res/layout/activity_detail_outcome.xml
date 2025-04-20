@@ -2,62 +2,47 @@
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:tools="http://schemas.android.com/tools">
+    xmlns:tools="http://schemas.android.com/tools"
+    android:background="#1C1B2E">
 
     <LinearLayout
         android:id="@+id/main"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:gravity="center_horizontal"
-        android:orientation="vertical">
-
+        android:orientation="vertical"
+        android:paddingBottom="32dp">
 
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="65dp"
-            android:background="@color/main"
-            tools:ignore="MissingConstraints">
+            android:background="#1C1B2E"
+            android:elevation="4dp">
 
             <ImageView
                 android:id="@+id/btn_back"
                 android:layout_width="25dp"
                 android:layout_height="25dp"
                 android:layout_marginRight="20dp"
-                android:src="@drawable/back" />
+                android:layout_gravity="start|center_vertical"
+                android:src="@drawable/back"
+                android:tint="#FFFFFF" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="지출 영수증"
+                android:text="수정/삭제"
                 android:textColor="#FFFFFF"
-                android:textSize="30sp"
+                android:textSize="24sp"
                 android:layout_gravity="center"
                 android:textStyle="bold" />
-
-
 
             <TextView
                 android:layout_width="1dp"
                 android:layout_height="1dp"
-                android:id="@+id/outcome_log_seq"/>
-
+                android:id="@+id/todoSeq" />
         </androidx.appcompat.widget.Toolbar>
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:layout_marginTop="30dp">
-            <TextView
-                android:id="@+id/detail_outcome_date"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="수입 날짜"
-                android:textSize="20dp"/>
-
-        </LinearLayout>
-
-
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -65,109 +50,15 @@
             android:gravity="center"
             android:layout_marginTop="30dp">
 
-
-            <androidx.appcompat.widget.AppCompatButton
-                android:id="@+id/btn_pass_outcome"
-                android:layout_width="150dp"
-                android:layout_height="80dp"
-                android:backgroundTint="#F5F5F5"
-                android:text="넘어올 값" />
-        </LinearLayout>
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginHorizontal="30dp"
-            android:layout_marginTop="30dp"
-            android:orientation="horizontal">
-
             <TextView
+                android:id="@+id/todo"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="지출수단"
-                android:layout_marginRight="10dp"
-                android:textSize="20sp"
-                android:textStyle="bold" />
-
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="체크카드"
-                android:textAlignment="center"
-                android:textSize="20sp"
-                android:id="@+id/outcome_dialog_receipt"/>
-
-
+                android:textSize="24dp"
+                android:textColor="#F28C28"
+                android:text="수입 날짜" />
         </LinearLayout>
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginHorizontal="30dp"
-            android:layout_marginTop="30dp"
-            android:orientation="horizontal">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="금액"
-                android:layout_marginRight="10dp"
-                android:textSize="20sp"
-                android:textStyle="bold" />
-
-
-            <EditText
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="1500"
-                android:background="@null"
-                android:textAlignment="center"
-                android:layout_marginLeft="120dp"
-                android:textSize="20sp"
-                android:id="@+id/outcome_money_receipt"/>
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="원"
-                android:layout_marginLeft="10dp"
-                android:textSize="20sp"
-                android:textStyle="bold" />
-
-
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginHorizontal="30dp"
-            android:layout_marginTop="30dp"
-            android:orientation="horizontal">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="내역"
-                android:layout_marginRight="10dp"
-                android:textSize="20sp"
-                android:textStyle="bold" />
-
-
-            <EditText
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="입력된 내역"
-                android:textAlignment="center"
-                android:textColor="#A1A1A1"
-                android:textSize="20sp"
-                android:id="@+id/outcome_info_receipt" />
-
-
-        </LinearLayout>
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -176,26 +67,58 @@
             android:orientation="vertical">
 
             <TextView
-                android:layout_width="50dp"
-                android:layout_height="40dp"
-                android:text="메모"
-                android:textSize="20sp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="할일"
+                android:textColor="#FFFFFF"
+                android:textSize="15sp"
                 android:textStyle="bold" />
 
             <EditText
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:background="@drawable/text_border"
-                android:hint="메모를 입력하세요"
-                android:id="@+id/outcome_memo_receipt"
-                android:inputType="textMultiLine"
-                android:lines="3"
-                android:maxLength="45"
-                android:maxLines="3"
-                android:gravity="start|top"
-                android:scrollbars="vertical" />
+                android:layout_height="45dp"
+                android:id="@+id/todo_title"
+                android:background="@drawable/bg_input_dark"
+                android:textColor="#FFFFFF"
+                android:textSize="15sp"
+                android:padding="10dp"
+                android:hint="입력된 내역"
+                android:textColorHint="#888888"
+                android:inputType="text"
+                android:layout_marginTop="10dp"/>
         </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="30dp"
+            android:layout_marginTop="30dp"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="메모"
+                android:textColor="#FFFFFF"
+                android:textSize="15sp"
+                android:textStyle="bold" />
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
+                android:layout_marginTop="10dp"
+                android:id="@+id/todo_memo"
+                android:background="@drawable/bg_input_dark"
+                android:textColor="#FFFFFF"
+                android:hint="메모를 입력하세요"
+                android:textColorHint="#888888"
+                android:gravity="start|top"
+                android:padding="10dp"
+                android:scrollbars="vertical"
+                android:inputType="textMultiLine" />
+
+        </LinearLayout>
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -205,88 +128,24 @@
 
             <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/btn_update"
-                android:layout_width="80dp"
+                android:layout_width="100dp"
                 android:layout_height="50dp"
                 android:layout_marginHorizontal="10dp"
-                android:backgroundTint="#F5F5F5"
-                android:textColor="#4E89AE"
+                android:backgroundTint="#F28C28"
+                android:textColor="#FFFFFF"
                 android:textStyle="bold"
                 android:text="수정" />
 
             <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/btn_drop"
-                android:layout_width="80dp"
+                android:layout_width="100dp"
                 android:layout_height="50dp"
                 android:layout_marginHorizontal="10dp"
-                android:backgroundTint="#F5F5F5"
-                android:textColor="#4E89AE"
+                android:backgroundTint="#F28C28"
+                android:textColor="#FFFFFF"
                 android:textStyle="bold"
                 android:text="삭제" />
         </LinearLayout>
-
-        <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-
-            <!-- 하단 고정 바 -->
-            <View
-                android:id="@+id/bottom_navigation"
-                android:layout_width="match_parent"
-                android:layout_height="60dp"
-                android:background="@drawable/bottom"
-                android:layout_alignParentBottom="true" />
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:gravity="center"
-                android:padding="10dp">
-
-                <ImageView
-                    android:id="@+id/calendar_icon"
-                    android:layout_width="30dp"
-                    android:layout_marginHorizontal="20dp"
-                    android:layout_height="30dp"
-                    android:layout_marginVertical="10dp"
-                    android:src="@drawable/calendar_days"/>
-
-                <ImageView
-                    android:id="@+id/chart_icon"
-                    android:layout_width="30dp"
-                    android:layout_marginHorizontal="20dp"
-                    android:layout_marginVertical="10dp"
-                    android:layout_height="30dp"
-                    android:src="@drawable/chart_pie"/>
-
-                <ImageView
-                    android:id="@+id/user_icon"
-                    android:layout_width="30dp"
-                    android:layout_marginVertical="10dp"
-                    android:layout_marginHorizontal="20dp"
-                    android:layout_height="30dp"
-                    android:src="@drawable/user"/>
-
-                <ImageView
-                    android:id="@+id/list_icon"
-                    android:layout_width="30dp"
-                    android:layout_marginVertical="10dp"
-                    android:layout_marginHorizontal="20dp"
-                    android:layout_height="30dp"
-                    android:src="@drawable/list"/>
-
-                <ImageView
-                    android:id="@+id/search_icone"
-                    android:layout_width="30dp"
-                    android:layout_marginVertical="10dp"
-                    android:layout_marginHorizontal="20dp"
-                    android:layout_height="30dp"
-                    android:src="@drawable/search"/>
-
-            </LinearLayout>
-        </RelativeLayout>
-
-
     </LinearLayout>
 </ScrollView>
+

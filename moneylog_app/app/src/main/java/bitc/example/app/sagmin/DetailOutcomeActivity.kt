@@ -16,6 +16,7 @@ import bitc.example.app.AppServerClass
 import bitc.example.app.R
 import bitc.example.app.databinding.ActivityDetailOutcomeBinding
 import bitc.example.app.dto.ExpenseLogDTO
+import bitc.example.app.dto.TodoListDTO
 import bitc.example.app.kms.MonthlyListActivity
 import bitc.example.app.sdh.MyPageCheckActivity
 import bitc.example.app.ui.CateSearchActivity
@@ -48,160 +49,73 @@ class DetailOutcomeActivity : AppCompatActivity() {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
-
-
-
         binding.btnBack.setOnClickListener{
             finish()
         }
 
 
-        binding.calendarIcon.setOnClickListener{}
 
-        binding.chartIcon.setOnClickListener {  val intent = Intent(this, Analyze_List::class.java)
-            startActivity(intent) }
+//        어댑터에서 가져온 데이터를 변수를 선언해서 담아줌
+        val todoSeq = intent.getIntExtra("todoSeq", -1)
+        val todoTitle = intent.getStringExtra("todoTitle")
+        val todoMemo = intent.getStringExtra("todoMemo")
+        val todoStatus = intent.getStringExtra("todoStatus")
 
-        binding.userIcon.setOnClickListener { val intent = Intent(this, MyPageCheckActivity::class.java)
-            startActivity(intent)  }
-
-        binding.listIcon.setOnClickListener {
-            val intent = Intent(this,MonthlyListActivity::class.java)
-            startActivity(intent)
-        }
-
-        binding.searchIcone.setOnClickListener {
-            val intent = Intent(this, CateSearchActivity::class.java)
-            startActivity(intent)
-        }
+//        incomAdapter에서 값을 받아와서 상세페이지에 바인딩
+        binding.todoSeq.text = todoSeq.toString()
+        binding.todo.setText(todoTitle)
+        binding.todoTitle.setText(todoTitle)
+        binding.todoMemo.setText(todoMemo)
+//        binding.todoStatus.setText(todoStatus)
 
 
-        binding.outcomeDialogReceipt.setOnClickListener{
-            val bankDialog = IncomeBankChangeActivity(this, selectedBanks ?: "") { selected ->
-                selectedBanks = selected.toString()
-                updateBankText()
-            }
-            bankDialog.show()
-
-
-        }
-
-
-
-        binding.btnPassOutcome.setOnClickListener {
-            val categoryDialog = OutcomeCategoryChangeActivity(this, selectedCategories ?:""){ selected ->
-                selectedCategories = selected.toString()
-                updateCategoryText()
-            }
-            categoryDialog.show()
-        }
-
-        val expenseLogSeq = intent.getIntExtra("expenseLogSeq",-1)
-        val expenseCate = intent.getStringExtra("expenseCate")
-        val expenseMoney = intent.getStringExtra("expenseMoney")
-        val expenseMemo = intent.getStringExtra("expenseMemo")
-        val paymentOption =intent.getStringExtra("paymentOption")
-        val expenseUse = intent.getStringExtra("expenseUse")
-        val expenseDate = intent.getStringExtra("expenseDate")
-
-        binding.outcomeLogSeq.text = expenseLogSeq.toString()
-        binding.btnPassOutcome.text = expenseCate
-        binding.outcomeMoneyReceipt.setText(expenseMoney)
-        binding.outcomeMemoReceipt.setText(expenseMemo)
-        binding.outcomeDialogReceipt.text = paymentOption
-        binding.outcomeInfoReceipt.setText(expenseUse)
-        binding.detailOutcomeDate.text = expenseDate
-
-
+//      수정 버튼 클릭시 발생할 이벤트
         binding.btnUpdate.setOnClickListener {
-            val cate = binding.btnPassOutcome.text.toString()
-            val money = binding.outcomeMoneyReceipt.text.toString()
-            val payment = binding.outcomeDialogReceipt.text.toString()
-            val date = binding.detailOutcomeDate.text.toString()
-            val memo = binding.outcomeMemoReceipt.text.toString()
-            val use = binding.outcomeInfoReceipt.text.toString()
-            val seq = binding.outcomeLogSeq.text.toString().toInt()
+//            바인딩에 저장된 값을 변수에 담아서
+            val seq = binding.todoSeq.text.toString().toInt()
+            val todoTitle = binding.todoTitle.text.toString()
+            val todoMemo = binding.todoMemo.text.toString()
+//            val todoStatus = binding.todoStatus.text.toString()
 
-
-            var expense = ExpenseLogDTO()
-            expense.expenseUse = use
-            expense.expenseCate = cate
-            expense.expenseMemo = memo
-            expense.expenseDate = date
-            expense.expenseLogSeq = seq
-            expense.expenseMoney = money
-            expense.paymentOption = payment
+//            매개변수로 보낼 DTO타입의 변수를 선언하고 클릭된 요소의 내용들을 그 안에 담아서 서버에 보냄
+            var todo = TodoListDTO()
+            todo.todoSeq = seq
+            todo.todoMemo = todoMemo
+            todo.todoTitle = todoTitle
+            todo.todoStatus = todoStatus
 
             val api = AppServerClass.instance
-            val call = api.updateOutcome(expense)
+            val call = api.updateTodo(todo)
             retrofitResponse(call)
-
-            Log.d("DetailOutcomeActivity", "expenseUse: $use")
-            Log.d("DetailOutcomeActivity", "expenseCate: $cate")
-            Log.d("DetailOutcomeActivity", "expenseMoney: $money")
-            Log.d("DetailOutcomeActivity", "expenseMemo: $memo")
-            Log.d("DetailOutcomeActivity", "paymentOption: $payment")
-            Log.d("DetailOutcomeActivity", "expenseDate: $date")
-            Log.d("DetailOutcomeActivity", "expenseLogSeq: $seq")
         }
 
 
-
+//      삭제 버튼 클릭시 발생할 이벤트
         binding.btnDrop.setOnClickListener {
-            val seq = binding.outcomeLogSeq.text?.toString()?.toIntOrNull() ?: -1
+//            val seq = binding.todoSeq.text?.toString()?.toIntOrNull() ?: -1
+
+            val seq = binding.todoSeq.text.toString().toInt()
+
 
             if (seq == -1) {
-                Log.e("DetailOutcomeActivity", "삭제할 수 없는 데이터입니다.")
+                Log.e("DetailIncomeActivity", "삭제할 수 없는 데이터입니다.")
                 return@setOnClickListener
             }
 
             // 삭제 확인 다이얼로그
-            val dialog = AlertDialog.Builder(this)
+            AlertDialog.Builder(this)
                 .setTitle("삭제 확인")
                 .setMessage("정말로 삭제하시겠습니까?")
                 .setPositiveButton("삭제") { _, _ ->
                     val api = AppServerClass.instance
-                    val call = api.deleteOutcome(seq)
+                    val call = api.deleteTodo(seq)
                     retrofitResponse(call) // 재사용 함수 호출
                 }
                 .setNegativeButton("취소", null)
-                .create()
-
-
-
-//            dialog.setOnDismissListener {
-//                // 다이얼로그가 닫힐 때 finish() 호출
-//                finish()
-//            }
-            dialog.show()
-        }
-    }
-    //  카테고리 선택 부분 클릭 시 다이얼로그 표시
-    private fun updateCategoryText() {
-            binding.btnPassOutcome.text = selectedCategories ?: "선택해주세요"
-
+                .show()
         }
 
-
-        //  자산 방식 클릭 시 다이얼로그 표시
-    private fun updateBankText(){
-        binding.outcomeDialogReceipt.text = selectedBanks ?: "선택해주세요"
     }
-
-    override fun onPause() {
-        super.onPause()
-
-        // 소프트 키보드가 열려 있으면 닫기
-        val imm = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
-        imm.hideSoftInputFromWindow(currentFocus?.windowToken, 0)
-    }
-
-    override fun onDestroy() {
-        super.onDestroy()
-
-        // 입력 채널이 제대로 해제되도록 명시적으로 처리
-        window?.decorView?.rootView?.clearFocus()
-    }
-
 
     override fun onSupportNavigateUp(): Boolean {
         super.onSupportNavigateUp()

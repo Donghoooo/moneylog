@@ -36,10 +36,6 @@ class DetailIncomeActivity : AppCompatActivity() {
     //  자산방식 선택
     private var selectedBanks : String? = null
 
-//
-
-
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
