@@ -9,17 +9,11 @@ import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
-import bitc.example.app.Analyze_List
 import bitc.example.app.AppServerClass
 import bitc.example.app.R
 import bitc.example.app.databinding.ActivityDetailIncomeBinding
-import bitc.example.app.dto.IncomeLogDTO
 import bitc.example.app.dto.TodoListDTO
 import bitc.example.app.kms.MonthlyListActivity
-import bitc.example.app.sdh.MyPageCheckActivity
-import bitc.example.app.ui.CateSearchActivity
-import bitc.example.app.ui.dialog.IncomeBankChangeActivity
-import bitc.example.app.ui.dialog.IncomeCategoryChangeActivity
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response

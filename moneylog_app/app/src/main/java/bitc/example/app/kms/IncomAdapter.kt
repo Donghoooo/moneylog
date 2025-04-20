@@ -12,7 +12,6 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import bitc.example.app.AppServerClass
 import bitc.example.app.databinding.IncomItemRecyclerViewBinding
-import bitc.example.app.dto.IncomeLogDTO
 import bitc.example.app.dto.TodoListDTO
 import bitc.example.app.sagmin.DetailIncomeActivity
 import okhttp3.Response

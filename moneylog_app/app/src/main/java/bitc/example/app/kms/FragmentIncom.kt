@@ -12,7 +12,6 @@ import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import bitc.example.app.AppServerClass
 import bitc.example.app.databinding.FragmentIncomBinding
-import bitc.example.app.dto.IncomeLogDTO
 import bitc.example.app.dto.TodoListDTO
 import retrofit2.Call
 import retrofit2.Callback

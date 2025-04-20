@@ -9,8 +9,6 @@ import androidx.recyclerview.widget.RecyclerView
 import bitc.example.app.AppServerClass
 import bitc.example.app.databinding.ExpenseItemRecyclerViewBinding
 import bitc.example.app.databinding.IncomItemRecyclerViewBinding
-import bitc.example.app.dto.ExpenseLogDTO
-import bitc.example.app.dto.IncomeLogDTO
 import bitc.example.app.dto.TodoListDTO
 import bitc.example.app.sagmin.DetailIncomeActivity
 import bitc.example.app.sagmin.DetailOutcomeActivity

@@ -14,8 +14,6 @@ import bitc.example.app.AppServerClass
 import bitc.example.app.R
 import bitc.example.app.databinding.FragmentExpenseBinding
 import bitc.example.app.databinding.FragmentIncomBinding
-import bitc.example.app.dto.ExpenseLogDTO
-import bitc.example.app.dto.IncomeLogDTO
 import bitc.example.app.dto.TodoListDTO
 import retrofit2.Call
 import retrofit2.Callback
