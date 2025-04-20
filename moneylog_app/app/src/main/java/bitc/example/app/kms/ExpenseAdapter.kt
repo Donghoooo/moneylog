@@ -32,7 +32,7 @@ class ExpenseAdapter(
 
         val binding = (holder as ExpenseViewHolder).binding
         val item = datas[index]
-        val done: String = "done"
+        val active: String = "active"
 
 //        리스트 바인딩 부분
         binding.expenseItemSeqData.text = datas[index].todoSeq.toString()
@@ -41,14 +41,14 @@ class ExpenseAdapter(
         binding.expenseItemSourceData.text = datas[index].todoStatus
 
 
-        // 체크박스 클릭 리스너
+        // 체크박스 해제 시 발생
         binding.todoCheckBox.setOnCheckedChangeListener { _, isChecked ->
-            if (isChecked) {
+            if (!isChecked) {
                 val todoSeq = item.todoSeq
 
                 val todo = TodoListDTO().apply {
                     this.todoSeq = todoSeq
-                    this.todoStatus = done
+                    this.todoStatus = active
                 }
 
                 val api = AppServerClass.instance
