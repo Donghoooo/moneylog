@@ -13,18 +13,6 @@
         android:padding="16dp"
         android:gravity="center">
 
-        <!-- 구분선 -->
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="@android:color/darker_gray"/>
-
-        <!-- 구분선 -->
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="@android:color/darker_gray"/>
-
         <androidx.recyclerview.widget.RecyclerView
             android:layout_width="match_parent"
             android:layout_height="match_parent"

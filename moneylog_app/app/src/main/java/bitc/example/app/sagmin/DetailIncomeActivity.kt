@@ -64,9 +64,10 @@ class DetailIncomeActivity : AppCompatActivity() {
 
 //        incomAdapter에서 값을 받아와서 상세페이지에 바인딩
         binding.todoSeq.text = todoSeq.toString()
+        binding.todo.setText(todoTitle)
         binding.todoTitle.setText(todoTitle)
         binding.todoMemo.setText(todoMemo)
-        binding.todoStatus.setText(todoStatus)
+//        binding.todoStatus.setText(todoStatus)
 
 
 //      수정 버튼 클릭시 발생할 이벤트
@@ -75,7 +76,7 @@ class DetailIncomeActivity : AppCompatActivity() {
             val seq = binding.todoSeq.text.toString().toInt()
             val todoTitle = binding.todoTitle.text.toString()
             val todoMemo = binding.todoMemo.text.toString()
-            val todoStatus = binding.todoStatus.text.toString()
+//            val todoStatus = binding.todoStatus.text.toString()
 
 //            매개변수로 보낼 DTO타입의 변수를 선언하고 클릭된 요소의 내용들을 그 안에 담아서 서버에 보냄
             var todo = TodoListDTO()
@@ -115,24 +116,6 @@ class DetailIncomeActivity : AppCompatActivity() {
                 .show()
         }
 
-
-        binding.calendarIcon.setOnClickListener{}
-
-        binding.chartIcon.setOnClickListener {  val intent = Intent(this,Analyze_List::class.java)
-            startActivity(intent) }
-
-        binding.userIcon.setOnClickListener { val intent = Intent(this,MyPageCheckActivity::class.java)
-            startActivity(intent)  }
-
-        binding.listIcon.setOnClickListener {
-            val intent = Intent(this,MonthlyListActivity::class.java)
-            startActivity(intent)
-        }
-
-        binding.searchIcone.setOnClickListener {
-            val intent = Intent(this, CateSearchActivity::class.java)
-            startActivity(intent)
-        }
     }
 
 
