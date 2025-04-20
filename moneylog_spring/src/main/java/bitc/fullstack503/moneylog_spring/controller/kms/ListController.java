@@ -31,28 +31,4 @@ public class ListController {
 
         return selectDonelist;
     }
-
-
-//    @GetMapping({"/list/income"})
-//    public List<IncomeLogDTO> incomelist(String memberId) throws Exception{
-////        ModelAndView mav = new ModelAndView("main/kms/list");
-//
-//        System.out.println(memberId);
-//
-//        List<IncomeLogDTO> incomeList = listService.selectincomeList(memberId);
-////        mav.addObject("incomeList", incomeList);
-//
-//        return incomeList;
-//    }
-
-//    @GetMapping({"/list/expense"})
-//    public List<ExpenseLogDTO> expenselist(String memberId) throws Exception{
-////        ModelAndView mav = new ModelAndView("main/kms/list");
-//
-//        List<ExpenseLogDTO> expenseList = listService.selectExpenseList(memberId);
-////        mav.addObject("incomeList", incomeList);
-//
-//        return expenseList;
-//    }
-
 }

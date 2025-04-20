@@ -14,7 +14,7 @@ public class IncomeController {
     private IncomeService incomeService;
 
     //    todo 내용 입력하기
-    @PostMapping ("signUp/process")
+    @PostMapping ("todoList/addTodo")
     public int signUpProcess (@RequestBody TodoListDTO title) throws Exception {
         return incomeService.signUpProcess(title);
     }
