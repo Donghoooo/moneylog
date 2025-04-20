@@ -2,6 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="bitc.fullstack503.moneylog_spring.mapper.kms.ListMapper">
 
+    <!--  todo 리스트 보기  -->
     <select id="selectTodoList" resultType="bitc.fullstack503.moneylog_spring.dto.TodoListDTO">
         SELECT
             *
@@ -11,6 +12,7 @@
         ORDER BY todo_seq DESC;
     </select>
 
+    <!--  완료된 리스트 보기  -->
     <select id="selectDoneList" resultType="bitc.fullstack503.moneylog_spring.dto.TodoListDTO">
         SELECT
             *
@@ -22,19 +24,35 @@
             todo_seq DESC;
     </select>
 
-<!--    <select id="selectincomeList" resultType="bitc.fullstack503.moneylog_spring.dto.IncomeLogDTO" parameterType="String">-->
-<!--        SELECT-->
-<!--            DATE_FORMAT(income_date, '%Y-%m-%d') AS income_date,-->
-<!--            income_log_seq, member_id, income_money, income_cate, income_memo, income_source, income_use-->
-<!--        FROM income_log-->
-<!--        WHERE member_id = #{memberId}-->
-<!--    </select>-->
+    <!--  todo 내용 입력하기  -->
+    <insert id="addTodo" parameterType="bitc.fullstack503.moneylog_spring.dto.TodoListDTO">
+        insert into
+            todo_list(todo_title)
+        values
+            (#{todoTitle})
+    </insert>
 
-<!--    <select id="selectExpenseList" resultType="bitc.fullstack503.moneylog_spring.dto.ExpenseLogDTO" parameterType="String">-->
-<!--        SELECT-->
-<!--            DATE_FORMAT(expense_date, '%Y-%m-%d') AS expense_date,-->
-<!--            expense_log_seq, member_id, expense_money, expense_cate, expense_memo, payment_option, expense_use-->
-<!--        FROM expense_log-->
-<!--        WHERE member_id = #{memberId}-->
-<!--    </select>-->
+    <!--  todo 내용 수정하기  -->
+    <update id="todoUpdate" parameterType="bitc.fullstack503.moneylog_spring.dto.TodoListDTO">
+        update todo_list
+        set todo_title =#{todoTitle}, todo_status =#{todoStatus}, todo_memo = #{todoMemo}, todo_Status = #{todoStatus}
+        where todo_seq = #{todoSeq};
+    </update>
+
+    <!--  todo 내용 삭제하기  -->
+    <delete id="todoDelete" parameterType="int">
+        DELETE FROM todo_list
+        where todo_seq = #{todoSeq}
+    </delete>
+
+    <!--  todo 상태 수정하기  -->
+    <update id="statusUpdate" parameterType="bitc.fullstack503.moneylog_spring.dto.TodoListDTO">
+        update
+            todo_list
+        set
+            todo_status =#{todoStatus}
+        where
+            todo_seq = #{todoSeq}
+    </update>
+
 </mapper>

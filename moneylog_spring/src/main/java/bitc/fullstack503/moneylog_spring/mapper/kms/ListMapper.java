@@ -1,7 +1,5 @@
 package bitc.fullstack503.moneylog_spring.mapper.kms;
 
-import bitc.fullstack503.moneylog_spring.dto.ExpenseLogDTO;
-import bitc.fullstack503.moneylog_spring.dto.IncomeLogDTO;
 import bitc.fullstack503.moneylog_spring.dto.TodoListDTO;
 import org.apache.ibatis.annotations.Mapper;
 
@@ -13,6 +11,12 @@ public interface ListMapper {
 
     List<TodoListDTO> selectDoneList() throws Exception;
 
+    int addTodo(TodoListDTO title) throws Exception;
 
-//    List<ExpenseLogDTO> selectExpenseList(String memberId) throws Exception;
+    int todoUpdate(TodoListDTO todo)throws Exception;
+
+    int todoDelete(int todoSeq)throws Exception;
+
+    int statusUpdate(TodoListDTO todo) throws Exception;
+
 }
