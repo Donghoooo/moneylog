@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/linear_income"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="#1A1A2E"
     android:orientation="horizontal"
-    android:id="@+id/linear_income"
     android:padding="8dp"
     android:gravity="center_vertical">
 
@@ -13,45 +13,48 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:buttonTint="#FFA04D"
-        android:textColor="@android:color/white"/>
-
+        android:text=" "
+        android:minHeight="0dp"
+        android:minWidth="0dp"
+        android:padding="0dp"
+        android:gravity="center_vertical" />
 
     <TextView
         android:id="@+id/incomItemCateData"
         android:layout_width="0dp"
-        android:layout_weight="1"
         android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:gravity="center_vertical"
         android:text="Todo Item"
         android:textColor="@android:color/white"
         android:paddingStart="8dp"/>
 
+    <!-- 숨겨진 텍스트뷰들 -->
     <TextView
         android:id="@+id/incomItemMemoData"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="숨겨질 텍스트"
-        android:visibility="gone"/>
+        android:visibility="gone" />
 
     <TextView
         android:id="@+id/incomItemSourceData"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="숨겨질 텍스트"
-        android:visibility="gone"/>
+        android:visibility="gone" />
 
     <TextView
         android:id="@+id/incomItemUseData"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="숨겨질 텍스트"
-        android:visibility="gone"/>
+        android:visibility="gone" />
 
     <TextView
         android:id="@+id/incomItemSeqData"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="숨겨질 텍스트"
-        android:visibility="gone"/>
+        android:visibility="gone" />
 </LinearLayout>
-
-
