@@ -2,80 +2,56 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="vertical"
-    android:id="@+id/linear_outcome"
-    android:paddingVertical="25dp"
-    android:paddingHorizontal="12dp"
-    android:background="#FFFFFF">
+    android:background="#1A1A2E"
+    android:orientation="horizontal"
+    android:id="@+id/linear_expense"
+    android:padding="8dp"
+    android:gravity="center_vertical">
 
-    <!-- 날짜 -->
-    <TextView
-        android:id="@+id/expenseItemDateData"
+    <CheckBox
+        android:id="@+id/todoCheckBox"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="2025.03.01"
-        android:textColor="#888888"
-        android:textSize="12sp"/>
+        android:buttonTint="#FFA04D"
+        android:textColor="@android:color/white"/>
 
-    <!-- 항목명 및 금액 -->
-    <LinearLayout
-        android:layout_width="match_parent"
+
+    <TextView
+        android:id="@+id/expenseItemCateData"
+        android:layout_width="0dp"
+        android:layout_weight="1"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_marginTop="4dp">
+        android:text="Todo Item"
+        android:textColor="@android:color/white"
+        android:paddingStart="8dp"/>
 
-        <TextView
-            android:id="@+id/expenseItemCateData"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="생활비"
-            android:textColor="#000000"
-            android:textSize="16sp"
-            android:textStyle="bold"/>
+    <TextView
+        android:id="@+id/expenseItemMemoData"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="숨겨질 텍스트"
+        android:visibility="gone"/>
 
-        <View
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:layout_weight="1"
-            />
+    <TextView
+        android:id="@+id/expenseItemSourceData"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="숨겨질 텍스트"
+        android:visibility="gone"/>
 
-        <TextView
-            android:id="@+id/expenseItemMoneyData"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="- 100,000원"
-            android:textColor="#F05D5E"
-            android:textSize="16sp"
-            android:textStyle="bold"/>
+    <TextView
+        android:id="@+id/expenseItemUseData"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="숨겨질 텍스트"
+        android:visibility="gone"/>
 
-        <TextView
-            android:id="@+id/expenseItemMemoData"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="숨겨질 텍스트"
-            android:visibility="gone"/>
-
-        <TextView
-            android:id="@+id/expenseItemOptionData"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="숨겨질 텍스트"
-            android:visibility="gone"/>
-
-        <TextView
-            android:id="@+id/expenseItemUseData"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="숨겨질 텍스트"
-            android:visibility="gone"/>
-
-        <TextView
-            android:id="@+id/expenseItemSeqData"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="숨겨질 텍스트"
-            android:visibility="gone"/>
-    </LinearLayout>
-
-
+    <TextView
+        android:id="@+id/expenseItemSeqData"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="숨겨질 텍스트"
+        android:visibility="gone"/>
 </LinearLayout>
+
+

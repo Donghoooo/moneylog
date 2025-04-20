@@ -58,7 +58,12 @@ class FragmentExpense : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        //  레트로 핏 API로 데이터를 받아오고 로그인 아이디를 담은 memberId를 매개변수로 서버로 전송
+
+//        //  레트로 핏 API로 데이터를 받아옴
+        refreshTodoList()
+    }
+
+    fun refreshTodoList() {
         val api = AppServerClass.instance
         val call = api.getDoneList()
 
@@ -66,35 +71,29 @@ class FragmentExpense : Fragment() {
             override fun onResponse(p0: Call<List<TodoListDTO>>, res: Response<List<TodoListDTO>>) {
                 if (res.isSuccessful) {
                     val result = res.body()?.toMutableList()
-                    Log.d("csy", "result : $result")
+                    Log.d("csy", "result refreshed : $result")
 
-                    val adapter = result?.let { ExpenseAdapter(it) }
+//                    todo 체크 시 바로 refresh 되면서 변경내용 반영
+                    val adapter = result?.let { ExpenseAdapter(it) { refreshTodoList() } }
+
 
                     binding.expenseRecyclerView.layoutManager = LinearLayoutManager(context)
                     binding.expenseRecyclerView.adapter = adapter
-                    binding.expenseRecyclerView.addItemDecoration(DividerItemDecoration(context, LinearLayoutManager.VERTICAL))
-                }
-                else {
-                    Log.d("csy", "송신실패")
+                    binding.expenseRecyclerView.addItemDecoration(
+                        DividerItemDecoration(context, LinearLayoutManager.VERTICAL)
+                    )
+                } else {
+                    Log.d("csy", "refresh 실패")
                 }
             }
 
             override fun onFailure(p0: Call<List<TodoListDTO>>, t: Throwable) {
-                Log.d("csy", "message : ${t.message}")
+                Log.d("csy", "refresh 에러: ${t.message}")
             }
         })
-
-//        val items = mutableListOf<String>()
-//        for (i in 1..12) {
-//            items.add("$i 월")
-//        }
-//
-//        val adapter = ExpenseAdapter(items)
-//
-//        binding.expenseRecyclerView.layoutManager = LinearLayoutManager(context)
-//        binding.expenseRecyclerView.adapter = adapter
-//        binding.expenseRecyclerView.addItemDecoration(DividerItemDecoration(context, LinearLayoutManager.VERTICAL))
     }
+
+
 
     companion object {
         /**
@@ -114,5 +113,6 @@ class FragmentExpense : Fragment() {
                     putString(ARG_PARAM2, param2)
                 }
             }
+
     }
 }
