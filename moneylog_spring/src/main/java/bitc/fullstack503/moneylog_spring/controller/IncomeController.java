@@ -1,6 +1,7 @@
 package bitc.fullstack503.moneylog_spring.controller;
 
 import bitc.fullstack503.moneylog_spring.dto.IncomeLogDTO;
+import bitc.fullstack503.moneylog_spring.dto.MemberDTO;
 import bitc.fullstack503.moneylog_spring.dto.TodoListDTO;
 import bitc.fullstack503.moneylog_spring.service.IncomeService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,12 +13,10 @@ public class IncomeController {
     @Autowired
     private IncomeService incomeService;
 
-//    수입 내용 입력하기
-    @PostMapping("income/process")
-    public void incomeProcess (@RequestBody IncomeLogDTO income) throws Exception
-    {
-        income.setMemberId ("test1");
-        incomeService.income (income);
+    //    todo 내용 입력하기
+    @PostMapping ("signUp/process")
+    public int signUpProcess (@RequestBody TodoListDTO title) throws Exception {
+        return incomeService.signUpProcess(title);
     }
 
     //    수입 내용 수정하기
@@ -31,6 +30,14 @@ public class IncomeController {
     public int todoDelete(@RequestParam("todoSeq") int todoSeq) throws Exception{
         return incomeService.todoDelete(todoSeq);
     }
+
+//    //    수입 내용 입력하기
+//    @PostMapping("income/process")
+//    public void incomeProcess (@RequestBody IncomeLogDTO income) throws Exception
+//    {
+//        income.setMemberId ("test1");
+//        incomeService.income (income);
+//    }
 
 ////    수입 내용 수정하기
 //    @PostMapping("income/update")

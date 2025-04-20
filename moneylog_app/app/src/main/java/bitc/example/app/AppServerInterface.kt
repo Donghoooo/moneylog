@@ -13,8 +13,8 @@ import retrofit2.http.POST
 import retrofit2.http.Query
 
 interface AppServerInterface {
-  @POST("signUp/process")
-  fun postSignUp(@Body member: MemberDTO): Call<String>
+//  @POST("signUp/process")
+//  fun postSignUp(@Body member: MemberDTO): Call<String>
 
   @POST("logIn/Process")
   fun postLogIn(@Body member: MemberDTO): Call<Boolean>
@@ -40,6 +40,9 @@ interface AppServerInterface {
 
 
 
+//  todo 입력
+  @POST("signUp/process")
+  fun postSignUp(@Body title: TodoListDTO): Call<Int>
 
   //  수입 수정
   @POST("todoList/update")
@@ -48,6 +51,14 @@ interface AppServerInterface {
   // 수입 삭제
   @DELETE("todoList/delete")
   fun deleteTodo(@Query("todoSeq") todoSeq: Int): Call<Int>
+
+  //  todoList
+  @GET("/todoList/todo")
+  fun getTodoList(): Call<List<TodoListDTO>>
+
+  //  doneList
+  @GET("/todoList/done")
+  fun getDoneList(): Call<List<TodoListDTO>>
 
 
 
@@ -77,13 +88,7 @@ interface AppServerInterface {
     @Query("sortBy") sortBy: String // 정렬 기준
   ): Call<List<SearchDTO>>
 
-//  todoList
-  @GET("/todoList/todo")
-  fun getTodoList(): Call<List<TodoListDTO>>
 
-  //  doneList
-  @GET("/todoList/done")
-  fun getDoneList(): Call<List<TodoListDTO>>
 
   //  수입/지출 리스트
   @GET("/list/income")

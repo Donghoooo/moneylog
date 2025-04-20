@@ -6,6 +6,7 @@
         SELECT
             *
         FROM todo_list
+        ORDER BY todo_seq DESC;
     </select>
 
     <select id="selectDoneList" resultType="bitc.fullstack503.moneylog_spring.dto.TodoListDTO">
@@ -15,6 +16,8 @@
             todo_list
         WHERE
             todo_status = 'done'
+        ORDER BY
+            todo_seq DESC;
     </select>
 
 <!--    <select id="selectincomeList" resultType="bitc.fullstack503.moneylog_spring.dto.IncomeLogDTO" parameterType="String">-->

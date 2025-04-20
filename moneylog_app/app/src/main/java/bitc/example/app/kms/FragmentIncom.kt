@@ -55,11 +55,12 @@ class FragmentIncom : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        //  레트로 핏 API로 데이터를 받아옴
+
+//        //  레트로 핏 API로 데이터를 받아옴
         val api = AppServerClass.instance
         val call = api.getTodoList()
 
-        call.enqueue(object : Callback<List<TodoListDTO>>{
+        call.enqueue(object : Callback<List<TodoListDTO>> {
             override fun onResponse(p0: Call<List<TodoListDTO>>, res: Response<List<TodoListDTO>>) {
                 if (res.isSuccessful) {
                     val result = res.body()?.toMutableList()
@@ -81,32 +82,6 @@ class FragmentIncom : Fragment() {
             }
         })
 
-//        //  레트로 핏 API로 데이터를 받아옴
-//        val api = AppServerClass.instance
-//        val call = api.getTodoList("test1")
-//
-//        call.enqueue(object : Callback<List<IncomeLogDTO>>{
-//            override fun onResponse(p0: Call<List<IncomeLogDTO>>, res: Response<List<IncomeLogDTO>>) {
-//                if (res.isSuccessful) {
-//                    val result = res.body()?.toMutableList()
-//                    Log.d("csy", "result : $result")
-//
-//                    val adapter = result?.let { IncomAdapter(it) }
-//
-//                    binding.incomRecyclerView.layoutManager = LinearLayoutManager(context)
-//                    binding.incomRecyclerView.adapter = adapter
-//                    binding.incomRecyclerView.addItemDecoration(DividerItemDecoration(context, LinearLayoutManager.VERTICAL))
-//                }
-//                else {
-//                    Log.d("csy", "송신실패")
-//                }
-//            }
-//
-//            override fun onFailure(p0: Call<List<IncomeLogDTO>>, t: Throwable) {
-//                Log.d("csy", "message : ${t.message}")
-//            }
-//        })
-
 //        val items = mutableListOf<String>()
 //        for (i in 1..12) {
 //            items.add("$i")
@@ -118,6 +93,7 @@ class FragmentIncom : Fragment() {
 //        binding.incomRecyclerView.adapter = adapter
 //        binding.incomRecyclerView.addItemDecoration(DividerItemDecoration(context, LinearLayoutManager.VERTICAL))
     }
+
 
     companion object {
         /**

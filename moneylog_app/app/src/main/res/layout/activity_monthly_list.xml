@@ -1,160 +1,94 @@
 <?xml version="1.0" encoding="utf-8"?>
+
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/main"
+    android:orientation="vertical"
+    android:background="#1A1A2E"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@android:color/white"
-    android:orientation="vertical">
+    android:padding="16dp">
 
-    <androidx.appcompat.widget.Toolbar
-        android:id="@+id/toolbar"
+
+    <RadioGroup
+        android:id="@+id/tabRadioGroup"
         android:layout_width="match_parent"
-        android:layout_height="65dp"
-        android:background="@color/main"
-        tools:ignore="MissingConstraints">
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:background="#1A1A2E">
 
-        <ImageView
-            android:id="@+id/btn_back"
-            android:layout_width="25dp"
-            android:layout_height="25dp"
-            android:src="@drawable/back" />
+        <RadioButton
+            android:id="@+id/btn_income"
+            style="@style/TabRadioButton"
+            android:text="Todo"
+            android:checked="true"/>
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:text="수입/지출 리스트"
-            android:textSize="20sp"
-            android:textStyle="bold" />
-    </androidx.appcompat.widget.Toolbar>
+        <RadioButton
+            android:id="@+id/btn_expense"
+            style="@style/TabRadioButton"
+            android:text="Complete"
+            android:checked="true"/>
 
+
+    </RadioGroup>
+
+    <!--        수입/지출 리스트 부분 -->
+    <LinearLayout
+        android:id="@+id/layout_fragment_base"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:orientation="vertical"
+        android:padding="16dp" />
+
+<!--    add -->
+    <!--    Add -->
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:padding="16dp">
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:layout_marginTop="32dp">
 
-
-        <!-- 총 합계 -->
-        <TextView
-            android:id="@+id/tvTotalAmount"
-            android:layout_width="match_parent"
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/todoBox"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:gravity="center"
-            android:padding="12dp"
-            android:text="남은 예산: 91,000원"
-            android:textSize="18sp"
-            android:textStyle="bold" />
+            app:cardCornerRadius="8dp"
+            app:strokeColor="@color/line"
+            app:strokeWidth="2dp">
 
-        <!-- 상단 버튼 (수입/지출 선택) -->
-        <RadioGroup
-            android:id="@+id/toggleGroup"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:background="@drawable/bg_toggle"
-            android:padding="2dp">
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:padding="8dp">
 
-            <RadioButton
-                android:id="@+id/btn_income"
-                android:layout_width="0dp"
-                android:layout_height="40dp"
-                android:layout_weight="1"
-                android:text="수입"
-                android:textSize="16sp"
-                android:gravity="center"
-                android:background="@drawable/toggle_selector"
-                android:textColor="@color/imcome"
-                android:button="@null" />
+                <EditText
+                    android:id="@+id/editTodo"
+                    android:layout_width="250dp"
+                    android:layout_height="50dp"
+                    android:backgroundTint="@color/white"
+                    android:hint="Add Todo"
+                    android:inputType="text"
+                    android:padding="10dp"
+                    android:textSize="16sp" />
 
-            <RadioButton
-                android:id="@+id/btn_expense"
-                android:layout_width="0dp"
-                android:layout_height="40dp"
-                android:layout_weight="1"
-                android:text="지출"
-                android:textSize="16sp"
-                android:gravity="center"
-                android:background="@drawable/toggle_selector"
-                android:textColor="@color/expense"
-                android:button="@null" />
-        </RadioGroup>
-
-<!--        수입/지출 리스트 부분 -->
-        <LinearLayout
-            android:id="@+id/layout_fragment_base"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical"
-            android:padding="16dp" />
+                <Button
+                    android:id="@+id/addTodo"
+                    android:layout_width="wrap_content"
+                    android:layout_height="50dp"
+                    android:layout_marginStart="8dp"
+                    android:backgroundTint="@color/orange"
+                    android:text="Add"
+                    android:textColor="@color/white"
+                    android:textSize="16sp" />
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
     </LinearLayout>
-
-    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-
-        <!-- 하단 고정 바 -->
-        <View
-            android:id="@+id/bottom_navigation"
-            android:layout_width="match_parent"
-            android:layout_height="60dp"
-            android:background="@drawable/bottom"
-            android:layout_alignParentBottom="true" />
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:gravity="center"
-            android:padding="10dp">
-
-            <ImageView
-                android:id="@+id/calendar_icon"
-                android:layout_width="30dp"
-                android:layout_marginHorizontal="20dp"
-                android:layout_height="30dp"
-                android:layout_marginVertical="10dp"
-                android:src="@drawable/calendar_days"/>
-
-            <ImageView
-                android:id="@+id/chart_icon"
-                android:layout_width="30dp"
-                android:layout_marginHorizontal="20dp"
-                android:layout_marginVertical="10dp"
-                android:layout_height="30dp"
-                android:src="@drawable/chart_pie"/>
-
-            <ImageView
-                android:id="@+id/user_icon"
-                android:layout_width="30dp"
-                android:layout_marginVertical="10dp"
-                android:layout_marginHorizontal="20dp"
-                android:layout_height="30dp"
-                android:src="@drawable/user"/>
-
-            <ImageView
-                android:id="@+id/list_icon"
-                android:layout_width="30dp"
-                android:layout_marginVertical="10dp"
-                android:layout_marginHorizontal="20dp"
-                android:layout_height="30dp"
-                android:src="@drawable/list"/>
-
-            <ImageView
-                android:id="@+id/search_icone"
-                android:layout_width="30dp"
-                android:layout_marginVertical="10dp"
-                android:layout_marginHorizontal="20dp"
-                android:layout_height="30dp"
-                android:src="@drawable/search"/>
-
-        </LinearLayout>
-    </RelativeLayout>
-
-
 
 
 
 </LinearLayout>
+
+

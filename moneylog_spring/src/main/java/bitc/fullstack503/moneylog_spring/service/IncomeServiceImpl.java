@@ -13,20 +13,22 @@ public class IncomeServiceImpl implements IncomeService {
     private IncomeMapper incomeMapper;
 
 //    todo 내용 입력하기
-    @Override
-    public void income(IncomeLogDTO income) throws Exception {
-        incomeMapper.income(income);
-    }
+
 
 //    todo 내용 수정하기
     @Override
     public int todoUpdate(TodoListDTO todo)throws Exception {
     return incomeMapper.todoUpdate(todo);
-}
+    }
 //    todo 내용 삭제하기
     @Override
     public int todoDelete(int todoSeq) throws Exception {
         return incomeMapper.todoDelete(todoSeq);
+    }
+
+    @Override
+    public int signUpProcess(TodoListDTO title) throws Exception {
+        return incomeMapper.signUpProcess(title);
     }
 
 

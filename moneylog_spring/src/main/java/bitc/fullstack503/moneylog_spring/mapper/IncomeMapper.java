@@ -7,7 +7,6 @@ import org.apache.ibatis.annotations.Mapper;
 @Mapper
 public interface IncomeMapper {
     //    todo 내용 입력하기
-    public void income(IncomeLogDTO income)throws Exception;
 
     //    todo 내용 수정하기
     int todoUpdate(TodoListDTO todo)throws Exception;
@@ -15,4 +14,5 @@ public interface IncomeMapper {
     //    todo 내용 삭제하기
     int todoDelete(int todoSeq)throws Exception;
 
+    int signUpProcess(TodoListDTO title) throws Exception;
 }

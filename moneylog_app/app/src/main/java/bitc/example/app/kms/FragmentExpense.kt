@@ -58,7 +58,6 @@ class FragmentExpense : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-
         //  레트로 핏 API로 데이터를 받아오고 로그인 아이디를 담은 memberId를 매개변수로 서버로 전송
         val api = AppServerClass.instance
         val call = api.getDoneList()

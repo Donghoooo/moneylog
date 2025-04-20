@@ -15,11 +15,11 @@ public class MemberController
     return memberService.isMember (member);
   }
   
-  @PostMapping ("signUp/process")
-  public void signUpProcess (@RequestBody MemberDTO member) throws Exception
-  {
-    memberService.signUp (member);
-  }
+//  @PostMapping ("signUp/process")
+//  public void signUpProcess (@RequestBody MemberDTO member) throws Exception
+//  {
+//    memberService.signUp (member);
+//  }
   
   @GetMapping ("isMemberId")
   public boolean isMemberId (@RequestParam ("Id") String memberId) throws Exception

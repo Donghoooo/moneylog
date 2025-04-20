@@ -3,9 +3,11 @@
 <mapper namespace="bitc.fullstack503.moneylog_spring.mapper.IncomeMapper">
 
 <!-- 수입 내역 입력하기 -->
-    <insert id="income" parameterType="bitc.fullstack503.moneylog_spring.dto.IncomeLogDTO">
-        insert into income_log(member_id,income_date,income_money,income_cate,income_memo,income_source,income_use)
-        values (#{memberId},#{incomeDate},#{incomeMoney},#{incomeCate},#{incomeMemo},#{incomeSource},#{incomeUse})
+    <insert id="signUpProcess" parameterType="bitc.fullstack503.moneylog_spring.dto.TodoListDTO">
+        insert into
+            todo_list(todo_title)
+        values
+            (#{todoTitle})
     </insert>
 
 <!--    todo 내용 수정하기 -->
