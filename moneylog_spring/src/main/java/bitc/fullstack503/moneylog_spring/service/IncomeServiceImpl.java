@@ -31,5 +31,10 @@ public class IncomeServiceImpl implements IncomeService {
         return incomeMapper.signUpProcess(title);
     }
 
+    @Override
+    public int statusUpdate(TodoListDTO todo) throws Exception {
+        return incomeMapper.statusUpdate(todo);
+    }
+
 
 }

@@ -1,14 +1,21 @@
 package bitc.example.app.kms
 
 import android.content.Intent
+import android.telecom.Call
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import android.view.WindowInsetsAnimation
+import androidx.recyclerview.widget.DividerItemDecoration
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import bitc.example.app.AppServerClass
 import bitc.example.app.databinding.IncomItemRecyclerViewBinding
 import bitc.example.app.dto.IncomeLogDTO
 import bitc.example.app.dto.TodoListDTO
 import bitc.example.app.sagmin.DetailIncomeActivity
+import okhttp3.Response
+import retrofit2.Callback
 
 class IncomAdapter(val datas: MutableList<TodoListDTO>): RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
@@ -22,12 +29,43 @@ class IncomAdapter(val datas: MutableList<TodoListDTO>): RecyclerView.Adapter<Re
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, index: Int) {
 
         val binding = (holder as IncomViewHolder).binding
+        val item = datas[index]
+        val done: String = "done"
 
 //        리스트 바인딩 부분
         binding.incomItemSeqData.text = datas[index].todoSeq.toString()
         binding.incomItemCateData.text = datas[index].todoTitle
         binding.incomItemMemoData.text = datas[index].todoMemo
         binding.incomItemSourceData.text = datas[index].todoStatus
+
+
+        // 체크박스 클릭 리스너
+        binding.todoCheckBox.setOnCheckedChangeListener { _, isChecked ->
+            val todoSeq = item.todoSeq
+
+            var todo = TodoListDTO()
+            todo.todoSeq = todoSeq
+            todo.todoStatus = done
+
+            val api = AppServerClass.instance
+            val call = api.updateStatus(todo)
+
+            call.enqueue(object : Callback<Int> {
+                override fun onResponse(p0: retrofit2.Call<Int>, res: retrofit2.Response<Int>) {
+                    if (res.isSuccessful) {
+                        val result = res.body()
+                        Log.d("csy", "result refreshed : $result")
+
+                    } else {
+                        Log.d("csy", "refresh 실패")
+                    }
+                }
+
+                override fun onFailure(p0: retrofit2.Call<Int>, t: Throwable) {
+                    Log.d("csy", "refresh 에러: ${t.message}")
+                }
+            })
+        }
 
 //        상세페이지 액티브로 데이터 보내기
         binding.linearIncome.setOnClickListener {
@@ -44,30 +82,11 @@ class IncomAdapter(val datas: MutableList<TodoListDTO>): RecyclerView.Adapter<Re
             context.startActivity(intent)
         }
 
-//        binding.incomItemDateData.text = datas[index].incomeLogSeq
-//        binding.incomItemCateData.text = datas[index].incomeCate
-//        binding.incomItemMoneyData.text = datas[index].incomeMoney
-//        binding.incomItemMemoData.text = datas[index].incomeMemo
-//        binding.incomItemSourceData.text = datas[index].incomeSource
-//        binding.incomItemUseData.text = datas[index].incomeUse
-//        binding.incomItemSeqData.text = datas[index].incomeLogSeq.toString()
-//
-//        binding.linearIncome.setOnClickListener {
-//            val context = holder.itemView.context
-//            val intent = Intent(context, DetailIncomeActivity::class.java).apply {
-//                putExtra("incomeLogSeq", datas[index].incomeLogSeq)
-//                putExtra("incomeDate", datas[index].incomeDate)
-//                putExtra("incomeCate", datas[index].incomeCate)
-//                putExtra("incomeMoney", datas[index].incomeMoney)
-//                putExtra("incomeSource", datas[index].incomeSource)
-//                putExtra("incomeMemo", datas[index].incomeMemo)
-//            }
-//            context.startActivity(intent)
-//        }
-
     }
 
 
 
 
 }
+
+

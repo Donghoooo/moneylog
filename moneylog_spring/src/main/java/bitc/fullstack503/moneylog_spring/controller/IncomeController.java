@@ -31,6 +31,13 @@ public class IncomeController {
         return incomeService.todoDelete(todoSeq);
     }
 
+    //    상태 수정하기
+    @PostMapping("todoList/status")
+    public int statusUpdate(@RequestBody TodoListDTO todo) throws Exception {
+        return incomeService.statusUpdate(todo);
+    }
+
+
 //    //    수입 내용 입력하기
 //    @PostMapping("income/process")
 //    public void incomeProcess (@RequestBody IncomeLogDTO income) throws Exception

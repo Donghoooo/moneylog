@@ -23,5 +23,15 @@
         where todo_seq = #{todoSeq}
     </delete>
 
+    <!--    상태 수정하기 -->
+    <update id="statusUpdate" parameterType="bitc.fullstack503.moneylog_spring.dto.TodoListDTO">
+        update
+            todo_list
+        set
+            todo_status =#{todoStatus}
+        where
+            todo_seq = #{todoSeq}
+    </update>
+
 
 </mapper>

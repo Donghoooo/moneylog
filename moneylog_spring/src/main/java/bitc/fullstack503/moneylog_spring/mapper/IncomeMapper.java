@@ -15,4 +15,6 @@ public interface IncomeMapper {
     int todoDelete(int todoSeq)throws Exception;
 
     int signUpProcess(TodoListDTO title) throws Exception;
+
+    int statusUpdate(TodoListDTO todo) throws Exception;
 }

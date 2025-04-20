@@ -48,6 +48,9 @@ interface AppServerInterface {
   @POST("todoList/update")
   fun updateTodo(@Body todo: TodoListDTO): Call<Int>
 
+  @POST("todoList/status")
+  fun updateStatus(@Body todo: TodoListDTO): Call<Int>
+
   // 수입 삭제
   @DELETE("todoList/delete")
   fun deleteTodo(@Query("todoSeq") todoSeq: Int): Call<Int>

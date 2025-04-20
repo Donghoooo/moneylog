@@ -6,6 +6,8 @@
         SELECT
             *
         FROM todo_list
+        WHERE
+            todo_status = 'active'
         ORDER BY todo_seq DESC;
     </select>
 

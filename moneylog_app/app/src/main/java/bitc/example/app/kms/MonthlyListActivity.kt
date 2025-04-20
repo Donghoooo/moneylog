@@ -23,7 +23,6 @@ import retrofit2.Response
 
 class MonthlyListActivity : AppCompatActivity() {
 
-    // 👇 여기 선언 추가!
     private lateinit var fragmentIncom: FragmentIncom
     private lateinit var fragmentExpense: FragmentExpense
 
@@ -82,6 +81,7 @@ class MonthlyListActivity : AppCompatActivity() {
 
 
 
+        //   플래그먼트
         val fragmentManager: FragmentManager = supportFragmentManager
         var transaction: FragmentTransaction = fragmentManager.beginTransaction()
 
