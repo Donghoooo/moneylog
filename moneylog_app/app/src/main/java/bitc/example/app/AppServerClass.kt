@@ -5,7 +5,7 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.converter.scalars.ScalarsConverterFactory
 import java.util.concurrent.TimeUnit
-
+//192.168.0.102
 object AppServerClass {
     private val BASE_URL = "http://192.168.0.102:8080/"
     val instance: AppServerInterface by lazy {

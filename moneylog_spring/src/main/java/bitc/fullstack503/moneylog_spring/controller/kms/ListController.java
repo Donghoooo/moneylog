@@ -13,7 +13,6 @@ public class ListController {
     @Autowired
     private ListService listService;
 
-
     //    todo 리스트 보기
     @GetMapping({"/todoList/todo"})
     public List<TodoListDTO> selectTodolist() throws Exception{
